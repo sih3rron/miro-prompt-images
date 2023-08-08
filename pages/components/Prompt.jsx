@@ -70,18 +70,6 @@ export default function Prompt() {
 
       <div className="grid">
         <div className="cs1 ce12">
-          {/* { dalleImage == undefined ? null : (
-              <Suspense fallback={ <Loading /> }>
-                <Image
-                  src={dalleImage}
-                  alt="this is an generated Image"
-                  width={200}
-                  height={200}
-                  draggable={true}
-                  className="miro-draggable draggable-item"
-                />
-              </Suspense>
-          )} */}
           { dalleImage == undefined && loading == false ? null : (
             loading === true ? (
               <Loading />

@@ -1,5 +1,6 @@
 import {useEffect} from 'react';
 import initMiro from '../initMiro';
+import Prompt from './components/Prompt';
 
 
 export const getServerSideProps = async function getServerSideProps({req}) {
