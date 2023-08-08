@@ -1,8 +1,6 @@
 import {useEffect} from 'react';
 import initMiro from '../initMiro';
-import Image from 'next/image';
-
-import congratulations from '../src/assets/congratulations.png';
+import Prompt from './components/Prompt';
 
 export const getServerSideProps = async function getServerSideProps({req}) {
   const {miro} = initMiro(req);
@@ -57,34 +55,9 @@ export default function Main({boards, authUrl}) {
 
   return (
     <div className="grid wrapper">
-      <div className="cs1 ce12">
-        <Image src={congratulations} alt="Congratulations text" />
-      </div>
-      <div className="cs1 ce12">
-        <h1>Congratulations!</h1>
-        <p>You've just created your first Miro app!</p>
-        <p>This is a list of all the boards that your user has access to:</p>
-
-        <ul>
-          {boards.map((board, idx) => (
-            <li key={idx}>{board}</li>
-          ))}
-        </ul>
-
-        <p>
-          To explore more and build your own app, see the Miro Developer
-          Platform documentation.
-        </p>
-      </div>
-      <div className="cs1 ce12">
-        <a
-          className="button button-primary"
-          target="_blank"
-          href="https://developers.miro.com"
-        >
-          Read the documentation
-        </a>
-      </div>
+    <div className="cs1 ce12">
+      <Prompt />
     </div>
+  </div>
   );
 }
