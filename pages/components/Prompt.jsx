@@ -5,8 +5,11 @@ import Loading from "./Loading";
 
 export default function Prompt() {
   const [dalleImage, setDalleImage] = useState();
+  const [loading, isLoading] = useState(false);
 
   const imageRequest = async (promptText) => {
+    isLoading(true);
+
     const response = await openai.createImage({
       prompt: promptText,
       n: 1,
@@ -14,8 +17,8 @@ export default function Prompt() {
     });
 
     setDalleImage(response.data.data[0].url);
-    console.log(dalleImage);
-    console.log(decodeURIComponent(dalleImage));
+
+    isLoading(false);
   };
 
   useEffect(() => {
@@ -67,8 +70,22 @@ export default function Prompt() {
 
       <div className="grid">
         <div className="cs1 ce12">
-          { dalleImage == undefined ? null : (
-            <Suspense fallback={ <Loading /> }>
+          {/* { dalleImage == undefined ? null : (
+              <Suspense fallback={ <Loading /> }>
+                <Image
+                  src={dalleImage}
+                  alt="this is an generated Image"
+                  width={200}
+                  height={200}
+                  draggable={true}
+                  className="miro-draggable draggable-item"
+                />
+              </Suspense>
+          )} */}
+          { dalleImage == undefined && loading == false ? null : (
+            loading === true ? (
+              <Loading />
+            ) : (
               <Image
                 src={dalleImage}
                 alt="this is an generated Image"
@@ -77,7 +94,7 @@ export default function Prompt() {
                 draggable={true}
                 className="miro-draggable draggable-item"
               />
-            </Suspense>
+            )
           )}
         </div>
       </div>
